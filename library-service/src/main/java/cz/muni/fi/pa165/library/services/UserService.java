@@ -1,11 +1,11 @@
 package cz.muni.fi.pa165.library.services;
 
+import cz.muni.fi.pa165.library.entities.Role;
 import cz.muni.fi.pa165.library.entities.User;
 import cz.muni.fi.pa165.library.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,6 +133,14 @@ public class UserService {
         if (user.getRoles().isEmpty()) {
             throw new IllegalArgumentException("User must have at least one role.");
         }
+        if (user.getRoles().size() > 2) {
+            throw new IllegalArgumentException("User can not have more than 2 roles.");
+        }
+        for (Role role: user.getRoles()) {
+            if (!role.getRoleName().equals(Role.LIBRARIAN) && !role.getRoleName().equals(Role.MEMBER)) {
+                throw new IllegalArgumentException("User have undefined role.");
+            }
+        }
         for (User u : findAll()) {
             if (u.getEmail().equals(user.getEmail())) {
                 throw new IllegalArgumentException("Email is already used by another user.");
@@ -174,4 +182,40 @@ public class UserService {
     public long count() {
         return userRepository.count();
     }
+
+    /**
+     *
+     * @param user to authenticate
+     * @param password entered password
+     * @return if entered password is valid
+     * @throws IllegalArgumentException if user does not have any password associated with him
+     */
+    public boolean authenticate(User user, String password) {
+        if (user.getPassword() == null) {
+            throw new IllegalArgumentException("User password is null.");
+        }
+        if (password == null) {
+            return false;
+        }
+        return password.equals(user.getPassword());
+    }
+
+    /**
+     * method checks if user is a librarian
+     * @param user
+     * @return true if user have role librarian, false otherwise
+     */
+    public boolean isLibrarian(User user) {
+        if (user == null || user.getRoles() == null) {
+            throw new IllegalArgumentException("User is null.");
+        }
+        boolean librarian = false;
+        for (Role role: user.getRoles()) {
+            if (role.getRoleName().equals(Role.LIBRARIAN)) {
+                librarian = true;
+            }
+        }
+        return librarian;
+    }
+
 }

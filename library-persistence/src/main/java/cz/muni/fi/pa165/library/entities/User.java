@@ -110,21 +110,30 @@ public class User {
         this.roles = roles;
     }
 
+    //equals and hashCode() from https://github.com/fi-muni/PA165/blob/master/eshop-persistence/src/main/java/cz/fi/muni/pa165/entity/User.java
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-
+        if (this == o)
+            return true;
+        if (o == null)
+            return false;
         if (!(o instanceof User))
             return false;
-
         User other = (User) o;
-
-        return id == other.getId();
+        if (email == null) {
+            if (other.getEmail() != null)
+                return false;
+        } else if (!email.equals(other.getEmail()))
+            return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return 383;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        return result;
     }
 
     @Override

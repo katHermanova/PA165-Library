@@ -7,6 +7,10 @@ import java.util.Objects;
 
 @Entity
 public class Role {
+
+    public static final String MEMBER = "member";
+    public static final String LIBRARIAN = "librarian";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
