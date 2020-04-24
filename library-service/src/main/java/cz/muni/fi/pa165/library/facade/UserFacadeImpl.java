@@ -1,10 +1,11 @@
 package cz.muni.fi.pa165.library.facade;
 
-import cz.muni.fi.pa165.library.dto.UserAuthenticateDTO;
+//import cz.muni.fi.pa165.library.dto.UserAuthenticateDTO;
 import cz.muni.fi.pa165.library.dto.UserDTO;
 import cz.muni.fi.pa165.library.entities.User;
 import cz.muni.fi.pa165.library.services.MappingService;
 import cz.muni.fi.pa165.library.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -17,13 +18,10 @@ import java.util.List;
 @Service
 @Transactional
 public class UserFacadeImpl implements UserFacade {
+    @Autowired
     private UserService userService;
+    @Autowired
     private MappingService mappingService;
-
-    public UserFacadeImpl(MappingService mappingService, UserService userService) {
-        this.mappingService = mappingService;
-        this.userService = userService;
-    }
 
     @Override
     public UserDTO findById(long id) {
@@ -74,10 +72,11 @@ public class UserFacadeImpl implements UserFacade {
         return userService.count();
     }
 
-    @Override
+    /*@Override
     public boolean authenticate(UserAuthenticateDTO u) {
         return userService.authenticate(userService.findById(u.getUserId()), u.getPassword());
-    }
+    }*/
+
     @Override
     public boolean isLibrarian(UserDTO user) {
         return userService.isLibrarian(mappingService.mapTo(user, User.class));

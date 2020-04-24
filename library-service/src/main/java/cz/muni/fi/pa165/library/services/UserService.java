@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.library.entities.User;
 import cz.muni.fi.pa165.library.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +21,10 @@ import java.util.List;
 @Service
 public class UserService {
 
+    @Autowired
     private UserRepository userRepository;
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
-    /**
-     * class constructor
-     *
-     * @param userRepository UserDAO
-     */
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
     /**
      * method is looking for specific User by id
@@ -190,7 +184,7 @@ public class UserService {
      * @return if entered password is valid
      * @throws IllegalArgumentException if user does not have any password associated with him
      */
-    public boolean authenticate(User user, String password) {
+    /*public boolean authenticate(User user, String password) {
         if (user.getPassword() == null) {
             throw new IllegalArgumentException("User password is null.");
         }
@@ -198,7 +192,7 @@ public class UserService {
             return false;
         }
         return password.equals(user.getPassword());
-    }
+    }*/
 
     /**
      * method checks if user is a librarian
