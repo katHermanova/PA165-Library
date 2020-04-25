@@ -20,6 +20,6 @@ public interface UserFacade {
     void deleteUser(long id);
     void deleteAllUsers();
     long count();
-    //boolean authenticate(UserAuthenticateDTO u);
+    boolean authenticate(UserAuthenticateDTO u);
     boolean isLibrarian(UserDTO user);
 }

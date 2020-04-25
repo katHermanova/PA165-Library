@@ -32,7 +32,7 @@ public class User {
 
     @Column(length = 60)
     @NotNull
-    private String password;
+    private String passwordHash;
 
     @OneToMany(mappedBy = "user")
     private Collection<SingleLoan> singleLoans;
@@ -46,11 +46,11 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
+    public User(String firstName, String lastName, String email, String passwordHash, Collection<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.roles = roles;
     }
 
@@ -86,12 +86,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public Collection<SingleLoan> getSingleLoans() {
@@ -143,7 +143,7 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
                 ", singleLoans=" + singleLoans + '\'' +
                 ", roles=" + roles +
                 '}';

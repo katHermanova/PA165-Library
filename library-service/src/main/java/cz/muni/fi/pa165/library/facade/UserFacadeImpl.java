@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.library.facade;
 
-//import cz.muni.fi.pa165.library.dto.UserAuthenticateDTO;
+import cz.muni.fi.pa165.library.dto.UserAuthenticateDTO;
 import cz.muni.fi.pa165.library.dto.UserDTO;
 import cz.muni.fi.pa165.library.entities.User;
 import cz.muni.fi.pa165.library.services.MappingService;
@@ -72,10 +72,10 @@ public class UserFacadeImpl implements UserFacade {
         return userService.count();
     }
 
-    /*@Override
+    @Override
     public boolean authenticate(UserAuthenticateDTO u) {
         return userService.authenticate(userService.findById(u.getUserId()), u.getPassword());
-    }*/
+    }
 
     @Override
     public boolean isLibrarian(UserDTO user) {
