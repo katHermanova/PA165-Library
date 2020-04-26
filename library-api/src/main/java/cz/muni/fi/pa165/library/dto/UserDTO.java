@@ -10,7 +10,7 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
+    private String passwordHash;
 
     public long getId() {
         return id;
@@ -44,12 +44,12 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     //equals() and hashCode() from https://github.com/fi-muni/PA165/blob/master/eshop-api/src/main/java/cz/fi/muni/pa165/dto/UserDTO.java
@@ -85,7 +85,7 @@ public class UserDTO {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
                 '}';
     }
 }
