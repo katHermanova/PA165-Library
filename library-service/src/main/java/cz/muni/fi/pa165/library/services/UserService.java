@@ -25,10 +25,19 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
+    //@Autowired
     private UserRepository userRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+
+    /**
+     * class constructor
+     *
+     * @param userRepository UserDAO
+     */
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     /**
      * method is looking for specific User by id
