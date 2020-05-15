@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 
@@ -44,6 +46,11 @@ public class UserController extends AbstractController {
     public List<UserDTO> findAllUsers() {
         LOGGER.info("Finding all books.");
         return userFacade.findAll();
+    }
+
+    @RequestMapping(value="/",method = RequestMethod.GET)
+    public String homepage(){
+        return "index";
     }
 
    /* @GetMapping(value = "/books", params = "title", produces = MediaType.APPLICATION_JSON_VALUE)
