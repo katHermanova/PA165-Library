@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.library;
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
+import cz.muni.fi.pa165.library.entities.User;
 import cz.muni.fi.pa165.library.facade.BookFacadeImpl;
 import cz.muni.fi.pa165.library.facade.LoanFacadeImpl;
 import cz.muni.fi.pa165.library.facade.UserFacadeImpl;
@@ -12,10 +13,12 @@ import cz.muni.fi.pa165.library.services.BookService;
 import cz.muni.fi.pa165.library.services.MappingService;
 import cz.muni.fi.pa165.library.services.SingleLoanService;
 import cz.muni.fi.pa165.library.services.UserService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import java.util.stream.Stream;
 
 /** @author Martin Páleník 359817 */
 
@@ -66,4 +69,17 @@ public class LibraryApplication {
     public LoanFacadeImpl loanFacadeImpl(MappingService mappingService, SingleLoanService singleLoanService) {
         return new LoanFacadeImpl(mappingService, singleLoanService);
     }
+
+    //just to try database
+    /*@Bean
+    CommandLineRunner init(UserRepository userRepository) {
+        return args -> {
+            Stream.of("John", "Julie", "Jennifer", "Helen", "Rachel").forEach(name -> {
+                User user = new User(name, "Smith", name.toLowerCase() + "@domain.com", true);
+                userRepository.save(user);
+            });
+            userRepository.findAll().forEach(System.out::println);
+        };
+    }*/
+
 }
